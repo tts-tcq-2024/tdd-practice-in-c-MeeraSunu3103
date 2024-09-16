@@ -24,9 +24,9 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCommasOrNewLin
 }
 
 TEST(StringCalculatorAddTests, ReturnsSumOfAnyNumberOfInputNumbers) {
-    char HundredOnes[101];
+    char HundredOnes[201];
     for(int i = 0; i < 100; ++i) {
-        strcat(HundredOnes,"1");
+        strcat(HundredOnes,"1,");
     }
     
     ASSERT_EQ(calculateStringSum("1"),1);
