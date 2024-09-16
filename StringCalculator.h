@@ -1,5 +1,6 @@
 #include "stdlib.h"
 #include "string.h"
+#include "ctype.h"
 
 /* Function Prototypes */
 int calculateStringSum(const char *inputString);
