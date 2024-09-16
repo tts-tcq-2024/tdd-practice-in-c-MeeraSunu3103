@@ -8,6 +8,7 @@ void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
 void addNumbersFromInputString(char *inputString, int* sumString);
 void removeNonDigitCharactersFromToken(char *token);
 void deleteCharFromStringByIndex(char *inputString, int charIndex);
+void removeNumbersGreaterThanThousand(char *token);
 
 int calculateStringSum(const char *inputString) {
   int stringSum = 0;
@@ -28,8 +29,9 @@ int isEmptyString(const char *inputString) {
 
 void addNumbersFromInputString(char *inputString, int* sumString) {
   char* token = strtok(inputString,",");
-  printf("\nsumString(before loop) = %d",*sumString);
   while (token != NULL) {
+    removeNonDigitCharactersFromToken(token);
+    removeNumbersGreaterThanThousand(token);
     (*sumString) += atoi(token);
     token = strtok(NULL,",");
   }
@@ -47,6 +49,12 @@ void deleteCharFromStringByIndex(char *inputString, int charIndex) {
         inputString[i] = inputString[i+1];
     }
     inputString[i] = '\0';
+}
+
+void removeNumbersGreaterThanThousand(char *token) {
+  if(atoi(token) > 1000) {
+    strcpy(token,"0");
+  }
 }
 
 void removeNonDigitCharactersFromToken(char *token) {
