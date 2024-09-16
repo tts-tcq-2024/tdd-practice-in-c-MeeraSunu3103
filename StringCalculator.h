@@ -2,7 +2,7 @@
 
 /* Function Prototypes */
 int calculateStringSum(const char *inputString);
-int isEmptyString(char *inputString);
+int isEmptyString(const char *inputString);
 
 int calculateStringSum(const char *inputString) {
   int stringSum = 0;
@@ -14,6 +14,6 @@ int calculateStringSum(const char *inputString) {
   return stringSum;
 }
 
-int isEmptyString(char *inputString) {
+int isEmptyString(const char *inputString) {
   return (strlen(inputString) == 0);
 }
