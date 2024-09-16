@@ -6,6 +6,8 @@ int calculateStringSum(const char *inputString);
 int isEmptyString(const char *inputString);
 void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
 void addNumbersFromInputString(char *inputString, int* sumString);
+void removeNonDigitCharactersFromToken(char *token);
+void deleteCharFromStringByIndex(char *inputString, int charIndex);
 
 int calculateStringSum(const char *inputString) {
   int stringSum = 0;
@@ -26,9 +28,35 @@ int isEmptyString(const char *inputString) {
 
 void addNumbersFromInputString(char *inputString, int* sumString) {
   char* token = strtok(inputString,",");
+  printf("\nsumString(before loop) = %d",*sumString);
   while (token != NULL) {
     (*sumString) += atoi(token);
     token = strtok(NULL,",");
+  }
+}
+
+/* Function Description: delete the character at the given index from the given string */
+/* Parameters:
+      inputString - string from which a character is to be deleted
+      charIndex - index of the character which is to be deleted
+*/
+void deleteCharFromStringByIndex(char *inputString, int charIndex) {        
+    int len = strlen(inputString); /* len - length of the input string */
+    int i;
+    for(i = charIndex; i < len-1; ++i) {
+        inputString[i] = inputString[i+1];
+    }
+    inputString[i] = '\0';
+}
+
+void removeNonDigitCharactersFromToken(char *token) {
+  int i = 0;
+  while(token[i] != '\0') {
+    if(!isdigit(token[i])) {
+      deleteCharFromStringByIndex(token,i);
+    } else {
+        ++i;
+    }
   }
 }
 
