@@ -6,10 +6,6 @@ TEST(StringCalculatorAddTests, ReturnsZeroForEmptyInput) {
     ASSERT_EQ(calculateStringSum(""),0);
 }
 
-TEST(StringCalculatorAddTests, ReturnsZeroForEmptyInput) {
-    ASSERT_EQ(calculateStringSum(""),0);
-}
-
 TEST(StringCalculatorAddTests, ReturnsZeroForSingleZeroInput) {
     ASSERT_EQ(calculateStringSum("0"),0);
 }
