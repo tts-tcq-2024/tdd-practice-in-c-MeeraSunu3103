@@ -1,19 +1,20 @@
-Test ID,Test Name,Test Description,Input,Expected Output,,
-TST01,ReturnsZeroForEmptyInput,,"""""",0,,
-TST02,ReturnsZeroForSingleZeroInput,,"""0""",0,,
-TST03,ReturnsSumOfInputNumbersSeparatedByCommas,,"""1,2""",3,,
-,,,"""12,1""",13,,
-TST04,ReturnsSumOfInputNumbersSeparatedByNewLines,,"""1\n2""",3,,
-TST05,ReturnsSumOfInputNumbersSeparatedByCommasOrNewLines,,"""1,2\n3""",6,,
-TST06,ReturnsSumOfAnyNumberOfInputNumbers,,"""1""",1,,
-,,,"""1,1""",2,,
-,,,"""1,1,1,1,1""",5,,
-,,,"""1,1,1,…1"" (100 times)",100,,
-TST07,ReturnsSumOfInputNumbersSeparatedByCustomDelimiter,,"""//;\n1;2""",3,,
-TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOrNewLines,,"""//;\n1;2\n3""",6,,
-TST09,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1",,
-TST10,ReturnsSumOfOnlyInputNumbersLessThanThousand,,"""1002,2""",2,,
-,,,"""1234,4567""",0,,
-TST11,ReturnsZeroIfInputStringDoesNotHaveNumbers,,""",\n,""",0,,
-,,,"""Hello, world!""",0,,
-TST12,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,,"""1, 2*1""",22,,
+Test ID,Test Name,Test Description,Input,Expected Output
+TST01,ReturnsZeroForEmptyInput,,"""""",0
+TST02,ReturnsZeroForSingleZeroInput,,"""0""",0
+TST03,ReturnsSumOfInputNumbersSeparatedByCommas,,"""1,2""",3
+,,,"""12,1""",13
+TST04,ReturnsSumOfInputNumbersSeparatedByNewLines,,"""1\n2""",3
+TST05,ReturnsSumOfInputNumbersSeparatedByCommasOrNewLines,,"""1,2\n3""",6
+TST06,ReturnsSumOfAnyNumberOfInputNumbers,,"""1""",1
+,,,"""1,1""",2
+,,,"""1,1,1,1,1""",5
+,,,"""1,1,1,…1"" (100 times)",100
+TST07,ReturnsSumOfInputNumbersSeparatedByCustomDelimiter,,"""//;\n1;2""",3
+TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength,,"""//;;\n1;;2""",3
+TST09,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOrNewLines,,"""//;\n1;2\n3""",6
+TST10,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1"
+TST11,ReturnsSumOfOnlyInputNumbersLessThanThousand,,"""1002,2""",2
+,,,"""1234,4567""",0
+TST12,ReturnsZeroIfInputStringDoesNotHaveNumbers,,""",\n,""",0
+,,,"""Hello, world!""",0
+TST13,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,,"""1, 2*1""",22
