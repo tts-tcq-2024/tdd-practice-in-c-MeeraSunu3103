@@ -1,9 +1,10 @@
 #include "stdlib.h"
 #include "string.h"
+#include "stdio.h"
 #include "ctype.h"
 
 /* Function Prototypes */
-int calculateStringSum(const char *inputString);
+int calculateStringSum(const char *inputString, char *errorMessage);
 int isEmptyString(const char *inputString);
 void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
 void addNumbersFromInputString(char *inputString, int* sumString);
@@ -12,8 +13,10 @@ void deleteCharFromStringByIndex(char *inputString, int charIndex);
 void removeNumbersGreaterThanThousand(char *token);
 void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString);
 void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDelimiter);
+void checkForNegativeNumbersInInputString(char *inputString, char *errorMessage);
+void throwExceptionForNegativeNumber(char *listOfNegativeNumbers, char *errorMessage);
 
-int calculateStringSum(const char *inputString) {
+int calculateStringSum(const char *inputString, char *errorMessage) {
   int stringSum = 0;
   char* customDelimiter;
   char tempInputString[strlen(inputString)];
@@ -22,6 +25,8 @@ int calculateStringSum(const char *inputString) {
   if(!isEmptyString(inputString)) {
     checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
+    strcpy(errorMessage, "");
+    checkForNegativeNumbersInInputString(tempInputString,errorMessage);
     addNumbersFromInputString(tempInputString, &stringSum);
   }
 
@@ -32,12 +37,38 @@ int isEmptyString(const char *inputString) {
   return (strlen(inputString) == 0);
 }
 
+void throwExceptionForNegativeNumber(char *listOfNegativeNumbers, char *errorMessage) {
+  if(listOfNegativeNumbers) {
+    strcpy(errorMessage,"negative numbers not allowed: ");
+    strcat(errorMessage, listOfNegativeNumbers);
+    errorMessage[strlen(errorMessage)-1] = '\0';
+    printf("\n%s\n",errorMessage);
+    exit(EXIT_FAILURE);
+  }
+}
+
+void checkForNegativeNumbersInInputString(char *inputString, char *errorMessage) {
+  char listOfNegativeNumbers[strlen(inputString)];
+  strcpy(listOfNegativeNumbers,"");
+  char* token = strtok(inputString,",");
+  while (token != NULL) {
+    if(atoi(token) < 0) {
+      strcat(listOfNegativeNumbers,token);
+      strcat(listOfNegativeNumbers,",");
+    }
+    token = strtok(NULL,",");
+  }
+  throwExceptionForNegativeNumber(listOfNegativeNumbers,errorMessage);
+}
+
 void addNumbersFromInputString(char *inputString, int* sumString) {
   char* token = strtok(inputString,",");
+  printf("\n\nsumString(before loop) = %d",*sumString);
   while (token != NULL) {
     removeNonDigitCharactersFromToken(token);
     removeNumbersGreaterThanThousand(token);
     (*sumString) += atoi(token);
+    printf("\nsumString(in loop) = %d",*sumString);
     token = strtok(NULL,",");
   }
 }
@@ -78,10 +109,12 @@ void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString) {
     char tempInputString[strlen(inputString)];
     strcpy(tempInputString,inputString);
     
-    char* customDelimiter = strtok(tempInputString+2,"\n");    
+    char* customDelimiter = strtok(tempInputString+2,"\n");
+    
     char* contentOfInputString = inputString + 2 + strlen(customDelimiter) + 1;
     
-    replaceCustomDelimiterWithCommaDelimiter(contentOfInputString, customDelimiter);    
+    replaceCustomDelimiterWithCommaDelimiter(contentOfInputString, customDelimiter);
+    
     strcpy(inputString,contentOfInputString);
   }
 }
@@ -92,29 +125,36 @@ void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDel
   char tempString2[lenInputString];
   int lenCustomDelimiter = strlen(customDelimiter);
   
-  /* set initial values for the temporary strings */
+//   printf("\n\ncustom delimiter: %s",customDelimiter);
+  
   strcpy(tempString2,"");
   strcpy(tempString,inputString);
   char* token = strstr(tempString,customDelimiter);
+  
+//   printf("\ntempString: %s\ttempString2: %s\ttoken: %s\n",tempString,tempString2,token);
     
   while(token != NULL) {
-    /* copy the characters that occur before the custom delimiter */
-    strncpy(tempString2,tempString,(token-tempString));    
+    strncpy(tempString2,tempString,(token-tempString));
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
+    
     tempString2[(token-tempString)] = '\0';
-
-    /* add the comma delimiter */
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
+    
     strcat(tempString2,",");
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
     
-    /* add the rest of the string after the custom delimiter */
     strcat(tempString2, (token+lenCustomDelimiter));
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
     
-    /* prepare for next iteration of the while loop */
-    strcpy(tempString,tempString2);    
-    token = strstr(tempString,customDelimiter);    
+    strcpy(tempString,tempString2);
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
+    
+    token = strstr(tempString,customDelimiter);
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s",tempString,tempString2,token);
+    
     strcpy(tempString2,"");
+    // printf("\ntempString: %s\ttempString2: %s\ttoken: %s\n",tempString,tempString2,token);
   }
-
-  /* finally copy the modified string into the input string */
   strcpy(inputString,tempString);
 }
 
