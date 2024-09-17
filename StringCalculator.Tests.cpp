@@ -67,7 +67,7 @@ TEST(StringCalculatorAddTests, ThrowsExceptionForNegativeInputNumbers) {
     ASSERT_ANY_THROW(calculateStringSum("-1,1,-1"));
 
     try{
-        calculateStringSum("-1,1,-1")
+        calculateStringSum("-1,1,-1");
     } catch (const std::runtime_error& e) {
         ASSERT_STREQ(e.what(),"negative numbers not allowed: -1,-1");
     }
