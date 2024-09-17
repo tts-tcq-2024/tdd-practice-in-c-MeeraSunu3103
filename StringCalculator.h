@@ -1,6 +1,6 @@
+#include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "stdio.h"
 #include "ctype.h"
 
 /* Function Prototypes */
@@ -15,22 +15,6 @@ void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDel
 void checkForNegativeNumbersInInputString(char *inputString);
 void throwExceptionForNegativeNumber(char *listOfNegativeNumbers);
 
-int calculateStringSum(const char *inputString) {
-  int stringSum = 0;
-  char* customDelimiter;
-  char tempInputString[strlen(inputString)];
-  strcpy(tempInputString, inputString);
-
-  if(strlen(inputString) != 0) {
-    checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
-    replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
-    checkForNegativeNumbersInInputString(tempInputString);
-    addNumbersFromInputString(tempInputString, &stringSum);
-  }
-  
-  return stringSum;
-}
-
 void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
   if(strlen(listOfNegativeNumbers) != 0) {
     char errorMessage[strlen(listOfNegativeNumbers) + 35];
@@ -43,9 +27,11 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
 }
 
 void checkForNegativeNumbersInInputString(char *inputString) {
+  char tempInputString[strlen(inputString)];
+  strcpy(tempInputString,inputString);
   char listOfNegativeNumbers[strlen(inputString)];
   strcpy(listOfNegativeNumbers,"");
-  char* token = strtok(inputString,",");
+  char* token = strtok(tempInputString,",");
   while (token != NULL) {
     if(atoi(token) < 0) {
       strcat(listOfNegativeNumbers,token);
@@ -54,6 +40,22 @@ void checkForNegativeNumbersInInputString(char *inputString) {
     token = strtok(NULL,",");
   }
   throwExceptionForNegativeNumber(listOfNegativeNumbers);
+}
+
+int calculateStringSum(const char *inputString) {
+  int stringSum = 0;
+  char* customDelimiter;
+  char tempInputString[strlen(inputString)];
+  strcpy(tempInputString, inputString);
+
+  if(strlen(inputString) != 0) {
+    checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
+    replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
+    checkForNegativeNumbersInInputString(tempInputString);
+    addNumbersFromInputString(tempInputString, &stringSum);
+  }
+
+  return stringSum;
 }
 
 void addNumbersFromInputString(char *inputString, int* sumString) {
@@ -102,12 +104,10 @@ void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString) {
     char tempInputString[strlen(inputString)];
     strcpy(tempInputString,inputString);
     
-    char* customDelimiter = strtok(tempInputString+2,"\n");
-    
+    char* customDelimiter = strtok(tempInputString+2,"\n");    
     char* contentOfInputString = inputString + 2 + strlen(customDelimiter) + 1;
     
-    replaceCustomDelimiterWithCommaDelimiter(contentOfInputString, customDelimiter);
-    
+    replaceCustomDelimiterWithCommaDelimiter(contentOfInputString, customDelimiter);    
     strcpy(inputString,contentOfInputString);
   }
 }
@@ -117,28 +117,30 @@ void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDel
   char tempString[lenInputString];
   char tempString2[lenInputString];
   int lenCustomDelimiter = strlen(customDelimiter);
-
   
+  /* set initial values for the temporary strings */
   strcpy(tempString2,"");
   strcpy(tempString,inputString);
   char* token = strstr(tempString,customDelimiter);
-
     
   while(token != NULL) {
-    strncpy(tempString2,tempString,(token-tempString));
-    
+    /* copy the characters that occur before the custom delimiter */
+    strncpy(tempString2,tempString,(token-tempString));    
     tempString2[(token-tempString)] = '\0';
-    
+
+    /* add the comma delimiter */
     strcat(tempString2,",");
     
+    /* add the rest of the string after the custom delimiter */
     strcat(tempString2, (token+lenCustomDelimiter));
     
-    strcpy(tempString,tempString2);
-    
-    token = strstr(tempString,customDelimiter);
-    
+    /* prepare for next iteration of the while loop */
+    strcpy(tempString,tempString2);    
+    token = strstr(tempString,customDelimiter);    
     strcpy(tempString2,"");
   }
+
+  /* finally copy the modified string into the input string */
   strcpy(inputString,tempString);
 }
 
