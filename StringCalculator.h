@@ -20,9 +20,7 @@ int calculateStringSum(const char *inputString) {
   strcpy(tempInputString, inputString);
 
   if(!isEmptyString(inputString)) {
-    printf("\n\nbefore checkAndReplaceCustomDelimiterWithCommaDelimiter: %s",tempInputString);
     checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
-    printf("\n\nafter checkAndReplaceCustomDelimiterWithCommaDelimiter: %s",tempInputString);
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
     addNumbersFromInputString(tempInputString, &stringSum);
   }
