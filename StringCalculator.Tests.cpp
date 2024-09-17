@@ -24,10 +24,10 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCommasOrNewLin
 }
 
 TEST(StringCalculatorAddTests, ReturnsSumOfAnyNumberOfInputNumbers) {
-    char HundredOnes[201];
-    for(int i = 0; i < 100; ++i) {
-        strcat(HundredOnes,"1,");
-    }
+    // char HundredOnes[201];
+    // for(int i = 0; i < 100; ++i) {
+    //     strcat(HundredOnes,"1,");
+    // }
     
     ASSERT_EQ(calculateStringSum("1"),1);
     ASSERT_EQ(calculateStringSum("1,1"),2);
@@ -47,10 +47,6 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimite
     ASSERT_EQ(calculateStringSum("//;\n1;2\n3"),6);
 }
 
-// TEST(StringCalculatorAddTests, ThrowsExceptionForNegativeInputNumbers) {
-//     ASSERT_EQ(calculateStringSum("-1,1,-1"),negatives not supported: -1, -1);
-// }
-
 TEST(StringCalculatorAddTests, ReturnsSumOfOnlyInputNumbersLessThanThousand) {
     ASSERT_EQ(calculateStringSum("1002,2"),2);
     ASSERT_EQ(calculateStringSum("1234,4567"),0);
@@ -63,4 +59,8 @@ TEST(StringCalculatorAddTests, ReturnsZeroIfInputStringDoesNotHaveNumbers) {
 
 TEST(StringCalculatorAddTests, IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters) {
     ASSERT_EQ(calculateStringSum("1, 2*1"),22);
+}
+
+TEST(StringCalculatorAddTests, ThrowsExceptionForNegativeInputNumbers) {
+    EXPECT_ANY_THROW(calculateStringSum("-1,1,-1"));
 }
