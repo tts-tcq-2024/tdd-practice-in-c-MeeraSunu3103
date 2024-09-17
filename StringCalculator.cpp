@@ -60,7 +60,7 @@ int calculateStringSum(const char *inputString) {
 }
 
 int addNumbersFromInputString(char *inputString) {
-  int stringSum = 0
+  int stringSum = 0;
   char* token = strtok(inputString,",");
   
   while (token != NULL) {
