@@ -24,6 +24,8 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
     strcat(errorMessage, listOfNegativeNumbers);
     errorMessage[strlen(errorMessage)-1] = '\0';
     throw std::runtime_error(errorMessage);
+  } else {
+    /* all ok */
   }
 }
 
@@ -44,7 +46,7 @@ void checkForNegativeNumbersInInputString(char *inputString) {
 }
 
 int calculateStringSum(const char *inputString) {
-  int stringSum = 0;
+  int stringSum;
   char* customDelimiter;
   char tempInputString[strlen(inputString)];
   strcpy(tempInputString, inputString);
@@ -54,6 +56,8 @@ int calculateStringSum(const char *inputString) {
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
     checkForNegativeNumbersInInputString(tempInputString);
     addNumbersFromInputString(tempInputString, &stringSum);
+  } else {
+    stringSum = 0;
   }
 
   return stringSum;
