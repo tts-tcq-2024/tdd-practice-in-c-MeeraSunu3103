@@ -6,7 +6,7 @@
 
 /* Function Prototypes */
 void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
-void addNumbersFromInputString(char *inputString, int* sumString);
+int addNumbersFromInputString(char *inputString);
 void removeNonDigitCharactersFromToken(char *token);
 void deleteCharFromStringByIndex(char *inputString, int charIndex);
 void removeNumbersGreaterThanThousand(char *token);
@@ -53,20 +53,24 @@ int calculateStringSum(const char *inputString) {
     checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
     checkForNegativeNumbersInInputString(tempInputString);
-    addNumbersFromInputString(tempInputString, &stringSum);
+    stringSum = addNumbersFromInputString(tempInputString);
   }
 
   return stringSum;
 }
 
-void addNumbersFromInputString(char *inputString, int* sumString) {
+int addNumbersFromInputString(char *inputString) {
+  int stringSum = 0
   char* token = strtok(inputString,",");
+  
   while (token != NULL) {
     removeNonDigitCharactersFromToken(token);
     removeNumbersGreaterThanThousand(token);
-    (*sumString) += atoi(token);
+    stringSum += atoi(token);
     token = strtok(NULL,",");
   }
+
+  return stringSum;
 }
 
 /* Function Description: delete the character at the given index from the given string */
