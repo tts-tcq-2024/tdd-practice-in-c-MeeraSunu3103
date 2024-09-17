@@ -10,11 +10,12 @@ TST06,ReturnsSumOfAnyNumberOfInputNumbers,,"""1""",1
 ,,,"""1,1,1,1,1""",5
 ,,,"""1,1,1,…1"" (100 times)",100
 TST07,ReturnsSumOfInputNumbersSeparatedByCustomDelimiter,,"""//;\n1;2""",3
-TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength,,"""//;*;\n1;*;2;*;3""",6
+TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength,,"""//;;\n1;;2""",3
 TST09,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOrNewLines,,"""//;\n1;2\n3""",6
-TST10,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1"
-TST11,ReturnsSumOfOnlyInputNumbersLessThanThousand,,"""1002,2""",2
+TST10,ReturnsSumOfOnlyInputNumbersLessThanThousand,,"""1002,2""",2
 ,,,"""1234,4567""",0
-TST12,ReturnsZeroIfInputStringDoesNotHaveNumbers,,""",\n,""",0
+TST11,ReturnsZeroIfInputStringDoesNotHaveNumbers,,""",\n,""",0
 ,,,"""Hello, world!""",0
-TST13,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,,"""1, 2*1""",22
+TST12,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,,"""1, 2*1""",22
+,,,"""//;1;1;1""",111
+TST13,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1"
