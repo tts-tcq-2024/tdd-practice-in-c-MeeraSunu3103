@@ -39,6 +39,10 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimite
     ASSERT_EQ(calculateStringSum("//;\n1;2"),3);
 }
 
+TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength) {
+    ASSERT_EQ(calculateStringSum("//;*;\n1;*;2;*;3"),6);
+}
+
 TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOrNewLines) {
     ASSERT_EQ(calculateStringSum("//;\n1;2\n3"),6);
 }
