@@ -24,15 +24,16 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCommasOrNewLin
 }
 
 TEST(StringCalculatorAddTests, ReturnsSumOfAnyNumberOfInputNumbers) {
-    // char HundredOnes[201];
-    // for(int i = 0; i < 100; ++i) {
-    //     strcat(HundredOnes,"1,");
-    // }
+    char HundredOnes[201];
+    strcpy(HundredOnes,"");
+    for(int i = 0; i < 100; ++i) {
+        strcat(HundredOnes,"1,");
+    }
     
     ASSERT_EQ(calculateStringSum("1"),1);
     ASSERT_EQ(calculateStringSum("1,1"),2);
     ASSERT_EQ(calculateStringSum("1,1,1,1,1"),5);
-    // ASSERT_EQ(calculateStringSum(HundredOnes),100);
+    ASSERT_EQ(calculateStringSum(HundredOnes),100);
 }
 
 TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimiter) {
