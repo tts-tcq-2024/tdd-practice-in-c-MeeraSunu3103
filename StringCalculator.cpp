@@ -5,7 +5,6 @@
 #include "StringCalculator.h"
 
 /* Function Prototypes */
-
 void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
 void addNumbersFromInputString(char *inputString, int* sumString);
 void removeNonDigitCharactersFromToken(char *token);
@@ -15,6 +14,8 @@ void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString);
 void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDelimiter);
 void checkForNegativeNumbersInInputString(char *inputString);
 void throwExceptionForNegativeNumber(char *listOfNegativeNumbers);
+int isCustomDelimiterFormatStarterPresent(char *inputString);
+int isCustomDelimiterFormatEnderPresent(char *inputString);
 
 void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
   if(strlen(listOfNegativeNumbers) != 0) {
@@ -99,8 +100,16 @@ void removeNonDigitCharactersFromToken(char *token) {
   }
 }
 
+int isCustomDelimiterFormatStarterPresent(char *inputString) {
+    return (((inputString[0] - '/') + (inputString[1] - '/')) == 0);
+}
+
+int isCustomDelimiterFormatEnderPresent(char *inputString) {
+    return (strstr(inputString+2,"\n") != NULL);
+}
+
 void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString) {
-  if((inputString[0] == '/') && (inputString[1] == '/')) {
+  if((isCustomDelimiterFormatStarterPresent(inputString) + isCustomDelimiterFormatEnderPresent(inputString)) == 2) {
     char tempInputString[strlen(inputString)];
     strcpy(tempInputString,inputString);
     
