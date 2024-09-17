@@ -10,7 +10,7 @@ TST06,ReturnsSumOfAnyNumberOfInputNumbers,,"""1""",1
 ,,,"""1,1,1,1,1""",5
 ,,,"""1,1,1,…1"" (100 times)",100
 TST07,ReturnsSumOfInputNumbersSeparatedByCustomDelimiter,,"""//;\n1;2""",3
-TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength,,"""//;;\n1;;2""",3
+TST08,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOfAnyLength,,"""//;*;\n1;*;2;*;3""",6
 TST09,ReturnsSumOfInputNumbersSeparatedByCustomDelimiterOrNewLines,,"""//;\n1;2\n3""",6
 TST10,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1"
 TST11,ReturnsSumOfOnlyInputNumbersLessThanThousand,,"""1002,2""",2
