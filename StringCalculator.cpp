@@ -2,7 +2,7 @@
 #include <string.h>
 #include <cctype>
 #include <iostream>
-#include <StringCalculator.h>
+#include "StringCalculator.h"
 
 /* Function Prototypes */
 
