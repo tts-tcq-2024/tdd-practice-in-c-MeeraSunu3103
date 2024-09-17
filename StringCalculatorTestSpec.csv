@@ -18,4 +18,4 @@ TST11,ReturnsZeroIfInputStringDoesNotHaveNumbers,,""",\n,""",0
 ,,,"""Hello, world!""",0
 TST12,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,,"""1, 2*1""",22
 ,,,"""//;1;1;1""",111
-TST13,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not supported: -1, -1"
+TST13,ThrowsExceptionForNegativeInputNumbers,,"""-1,1,-1""","negatives not allowed: -1, -1"
