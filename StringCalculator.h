@@ -4,7 +4,7 @@
 #include "ctype.h"
 
 /* Function Prototypes */
-int calculateStringSum(const char *inputString, char *errorMessage);
+int calculateStringSum(const char *inputString);
 int isEmptyString(const char *inputString);
 void replaceNewLineDelimiterWithCommaDelimiter(char *tempInputString);
 void addNumbersFromInputString(char *inputString, int* sumString);
@@ -13,10 +13,10 @@ void deleteCharFromStringByIndex(char *inputString, int charIndex);
 void removeNumbersGreaterThanThousand(char *token);
 void checkAndReplaceCustomDelimiterWithCommaDelimiter(char *inputString);
 void replaceCustomDelimiterWithCommaDelimiter(char *inputString, char* customDelimiter);
-void checkForNegativeNumbersInInputString(char *inputString, char *errorMessage);
-void throwExceptionForNegativeNumber(char *listOfNegativeNumbers, char *errorMessage);
+void checkForNegativeNumbersInInputString(char *inputString);
+void throwExceptionForNegativeNumber(char *listOfNegativeNumbers);
 
-int calculateStringSum(const char *inputString, char *errorMessage) {
+int calculateStringSum(const char *inputString) {
   int stringSum = 0;
   char* customDelimiter;
   char tempInputString[strlen(inputString)];
@@ -25,8 +25,7 @@ int calculateStringSum(const char *inputString, char *errorMessage) {
   if(!isEmptyString(inputString)) {
     checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
-    strcpy(errorMessage, "");
-    checkForNegativeNumbersInInputString(tempInputString,errorMessage);
+    checkForNegativeNumbersInInputString(tempInputString);
     addNumbersFromInputString(tempInputString, &stringSum);
   }
 
@@ -37,8 +36,9 @@ int isEmptyString(const char *inputString) {
   return (strlen(inputString) == 0);
 }
 
-void throwExceptionForNegativeNumber(char *listOfNegativeNumbers, char *errorMessage) {
+void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
   if(listOfNegativeNumbers) {
+    char errorMessage[strlen(listOfNegativeNumbers) + 35];
     strcpy(errorMessage,"negative numbers not allowed: ");
     strcat(errorMessage, listOfNegativeNumbers);
     errorMessage[strlen(errorMessage)-1] = '\0';
@@ -47,7 +47,7 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers, char *errorMes
   }
 }
 
-void checkForNegativeNumbersInInputString(char *inputString, char *errorMessage) {
+void checkForNegativeNumbersInInputString(char *inputString) {
   char listOfNegativeNumbers[strlen(inputString)];
   strcpy(listOfNegativeNumbers,"");
   char* token = strtok(inputString,",");
@@ -58,7 +58,7 @@ void checkForNegativeNumbersInInputString(char *inputString, char *errorMessage)
     }
     token = strtok(NULL,",");
   }
-  throwExceptionForNegativeNumber(listOfNegativeNumbers,errorMessage);
+  throwExceptionForNegativeNumber(listOfNegativeNumbers);
 }
 
 void addNumbersFromInputString(char *inputString, int* sumString) {
