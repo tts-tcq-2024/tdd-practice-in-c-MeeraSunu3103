@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cctype>
+#include <iostream>
 #include "StringCalculator.h"
 
 /* Function Prototypes */
