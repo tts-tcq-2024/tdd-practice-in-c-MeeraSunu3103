@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cctype>
-#include <iostream>
 #include "StringCalculator.h"
 
 /* Function Prototypes */
@@ -17,6 +16,10 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers);
 int isCustomDelimiterFormatStarterPresent(char *inputString);
 int isCustomDelimiterFormatEnderPresent(char *inputString);
 
+/* Function Description: sets the exception message and throws the exception once a negative number has been detected*/
+/* Parameters:
+      listOfNegativeNumbers - string in which the negative numbers have been listed so that they can be included in the exception message
+*/
 void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
   if(strlen(listOfNegativeNumbers) != 0) {
     char errorMessage[strlen(listOfNegativeNumbers) + 35];
@@ -27,11 +30,20 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers) {
   }
 }
 
+/* Function Description:  */
+/* Parameters:
+      p - 
+*/
 void checkForNegativeNumbersInInputString(char *inputString) {
+  /* create a copy of input string to be used with strtok() */
   char tempInputString[strlen(inputString)];
   strcpy(tempInputString,inputString);
+  
+  /* create a string to store the negative numbers */
   char listOfNegativeNumbers[strlen(inputString)];
   strcpy(listOfNegativeNumbers,"");
+
+  /* get the sub-string before the delimiter and loop through all such sub-strings */
   char* token = strtok(tempInputString,",");
   while (token != NULL) {
     if(atoi(token) < 0) {
@@ -61,8 +73,9 @@ int calculateStringSum(const char *inputString) {
 
 int addNumbersFromInputString(char *inputString) {
   int stringSum = 0;
-  char* token = strtok(inputString,",");
   
+  /* get the sub-string before the delimiter and loop through all such sub-strings */
+  char* token = strtok(inputString,",");  
   while (token != NULL) {
     removeNonDigitCharactersFromToken(token);
     removeNumbersGreaterThanThousand(token);
@@ -89,6 +102,7 @@ void deleteCharFromStringByIndex(char *inputString, int charIndex) {
 
 void removeNumbersGreaterThanThousand(char *token) {
   if(atoi(token) > 1000) {
+    /* if the number is greater than 1000, it is replaced with zero so that 0 is added to the string sum */
     strcpy(token,"0");
   }
 }
