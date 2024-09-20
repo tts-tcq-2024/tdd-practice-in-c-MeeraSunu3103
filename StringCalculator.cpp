@@ -17,6 +17,30 @@ void throwExceptionForNegativeNumber(char *listOfNegativeNumbers);
 int isCustomDelimiterFormatStarterPresent(char *inputString);
 int isCustomDelimiterFormatEnderPresent(char *inputString);
 
+/* Function Description: calculate the sum of numbers in a given string */
+/* Parameters:
+      inputString - the string of numbers whose sum is to be calculated 
+*/
+int calculateStringSum(const char *inputString) {
+  int stringSum = 0;
+
+  if(strlen(inputString) != 0) {
+    /* temporary input string */
+    char tempInputString[strlen(inputString)];
+    strcpy(tempInputString, inputString);
+
+    /* process and simplify the input string (copy) */    
+    checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
+    replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
+    checkForNegativeNumbersInInputString(tempInputString);
+
+    /* get the sum from the processed input string */
+    stringSum = addNumbersFromInputString(tempInputString);
+  }
+
+  return stringSum;
+}
+
 /* Function Description: sets the exception message and throws the exception once a negative number has been detected*/
 /* Parameters:
       listOfNegativeNumbers - string in which the negative numbers have been listed so that they can be included in the exception message
@@ -54,30 +78,6 @@ void checkForNegativeNumbersInInputString(char *inputString) {
     token = strtok(NULL,",");
   }
   throwExceptionForNegativeNumber(listOfNegativeNumbers);
-}
-
-/* Function Description: calculate the sum of numbers in a given string */
-/* Parameters:
-      inputString - the string of numbers whose sum is to be calculated 
-*/
-int calculateStringSum(const char *inputString) {
-  int stringSum = 0;
-
-  if(strlen(inputString) != 0) {
-    /* temporary input string */
-    char tempInputString[strlen(inputString)];
-    strcpy(tempInputString, inputString);
-
-    /* process and simplify the input string (copy) */    
-    checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
-    replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
-    checkForNegativeNumbersInInputString(tempInputString);
-
-    /* get the sum from the processed input string */
-    stringSum = addNumbersFromInputString(tempInputString);
-  }
-
-  return stringSum;
 }
 
 /* Function Description: add up all the numbers in the given input string and return the sum */
