@@ -62,13 +62,18 @@ void checkForNegativeNumbersInInputString(char *inputString) {
 */
 int calculateStringSum(const char *inputString) {
   int stringSum = 0;
-  char tempInputString[strlen(inputString)];
-  strcpy(tempInputString, inputString);
 
   if(strlen(inputString) != 0) {
+    /* temporary input string */
+    char tempInputString[strlen(inputString)];
+    strcpy(tempInputString, inputString);
+
+    /* process and simplify the input string (copy) */    
     checkAndReplaceCustomDelimiterWithCommaDelimiter(tempInputString);
     replaceNewLineDelimiterWithCommaDelimiter(tempInputString);
     checkForNegativeNumbersInInputString(tempInputString);
+
+    /* get the sum from the processed input string */
     stringSum = addNumbersFromInputString(tempInputString);
   }
 
