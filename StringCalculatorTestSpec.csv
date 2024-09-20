@@ -16,7 +16,8 @@ TST10,ReturnsSumOfOnlyInputNumbersLessThanThousand,"If the given input consists 
 ,,,"""1234,4567""",0
 TST11,ReturnsZeroIfInputStringDoesNotHaveNumbers,"If there are no numbers in the input string, then the returned sum is 0 as there is nothing to add up",""",\n,""",0
 ,,,"""Hello, world!""",0
-TST12,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,"If the given input consists of characters that are neither numbers not delimiters (e.g., spaces), they are ignored","""1, 2*1""",22
+TST12,IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters,"If the given input consists of characters that are neither numbers not delimiters (e.g., spaces), they are ignored","""1,a,1""",2
+,,,"""1, 2*1""",22
 ,,,"""//;1;1;1""",111
 TST13,ThrowsExceptionForNegativeInputNumbers,"If the given input consists of negative numbers, an exception is thrown and all the negative numbers are shown in the exception message","""-1,1,-1""","negative numbers not allowed: -1, -1"
 ,,,"""1,1,1""","(does not throw an exception)"
