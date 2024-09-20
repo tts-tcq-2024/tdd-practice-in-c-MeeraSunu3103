@@ -59,12 +59,9 @@ TEST(StringCalculatorAddTests, ReturnsZeroIfInputStringDoesNotHaveNumbers) {
 }
 
 TEST(StringCalculatorAddTests, IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters) {
+    ASSERT_EQ(calculateStringSum("1,a,1"),2);
     ASSERT_EQ(calculateStringSum("1, 2*1"),22);
     ASSERT_EQ(calculateStringSum("//;1;1;1"),111);
-}
-
-TEST(StringCalculatorAddTests, HandlesStringWithOnlyEmptyCharacterBetweenDelimiters) {
-    ASSERT_EQ(calculateStringSum("1,,1"),2);
 }
 
 TEST(StringCalculatorAddTests, ThrowsExceptionForNegativeInputNumbers) {
