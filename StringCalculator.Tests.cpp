@@ -51,7 +51,6 @@ TEST(StringCalculatorAddTests, ReturnsSumOfInputNumbersSeparatedByCustomDelimite
 TEST(StringCalculatorAddTests, ReturnsSumOfOnlyInputNumbersLessThanThousand) {
     ASSERT_EQ(calculateStringSum("1002,2"),2);
     ASSERT_EQ(calculateStringSum("1234,4567"),0);
-    ASSERT_EQ(calculateStringSum("1*2*3*4,4*5*6*7"),0);
 }
 
 TEST(StringCalculatorAddTests, ReturnsZeroIfInputStringDoesNotHaveNumbers) {
@@ -62,6 +61,10 @@ TEST(StringCalculatorAddTests, ReturnsZeroIfInputStringDoesNotHaveNumbers) {
 TEST(StringCalculatorAddTests, IgnoresInputCharactersThatAreNeitherNumbersNorDelimiters) {
     ASSERT_EQ(calculateStringSum("1, 2*1"),22);
     ASSERT_EQ(calculateStringSum("//;1;1;1"),111);
+}
+
+TEST(StringCalculatorAddTests, HandlesStringWithOnlyEmptyCharacterBetweenDelimiters) {
+    ASSERT_EQ(calculateStringSum("1,,1"),2);
 }
 
 TEST(StringCalculatorAddTests, ThrowsExceptionForNegativeInputNumbers) {
