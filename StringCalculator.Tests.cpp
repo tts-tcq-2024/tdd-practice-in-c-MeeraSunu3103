@@ -23,7 +23,9 @@ TEST(StringCalculatorAddTests, IgnoresCustomDelimiterWithoutCorrectFormat) {
 }
 
 TEST(StringCalculatorAddTests, ReturnsSumOfOnlyInputNumbersLessThanThousand) {
-    ASSERT_EQ(calculateStringSum("1000,2"),2);
+    ASSERT_EQ(calculateStringSum("999,2"),1001);
+    ASSERT_EQ(calculateStringSum("1000,2"),1002);
+    ASSERT_EQ(calculateStringSum("1001,2"),2);
     ASSERT_EQ(calculateStringSum("1234,4567"),0);
 }
 
